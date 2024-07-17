@@ -1,5 +1,3 @@
-#I PLAN ON SUBMITTING THIS TO MY GITHUB 
-
 import random
 import sys
 
@@ -41,6 +39,62 @@ def percentage(wins, games):
         return 0
     return (wins / games) * 100
 
+#BONUES MONEY PRIZES FOR LONG TERM PLAY
+def bonusBalance(wins, balance):
+    if wins == 500:
+        print('Dealer: You\'ve racked up 500 wins, that had to be excruciating!!!!')
+        print('*You received $100,000,000 from the dealer!*')
+        balance += 100000000
+    elif wins == 200:
+        print('\nDealer: You\'ve racked up 200 wins, here\'s a gift for your loyalty!')
+        print('*You recieved $10,000,000 from the dealer!*')
+        balance +=10000000
+    elif wins == 100:
+        print('\nDealer: You\'ve racked up 100 wins, here\'s a gift for playing!')
+        print('*You recieved $1,000,000 from the dealer!*')
+        balance +=1000000
+    elif wins == 90:
+        print('\nDealer: You\'ve racked up 90 wins, here\'s a gift for playing!')
+        print('*You recieved $500,000 from the dealer!*')
+        balance +=500000
+    elif wins == 80:
+        print('\nDealer: You\'ve racked up 80 wins, here\'s a gift for playing!')
+        print('*You recieved $250,000 from the dealer!*')
+        balance +=250000
+    elif wins == 70:
+        print('\nDealer: You\'ve racked up 70 wins, here\'s a gift for playing!')
+        print('*You recieved $100,000 from the dealer!*')
+        balance +=100000
+    elif wins == 60:
+        print('\nDealer: You\'ve racked up 60 wins, here\'s a gift for playing!')
+        print('*You recieved $75,000 from the dealer!*')
+        balance +=75000
+    elif wins == 50:
+        print('\nDealer: You\'ve racked up 50 wins, here\'s a gift for playing!')
+        print('*You recieved $50,000 from the dealer!*')
+        balance +=50000
+    elif wins == 40:
+        print('\nDealer: You\'ve racked up 40 wins, here\'s a gift for playing!')
+        print('*You recieved $25,000 from the dealer!*')
+        balance +=25000
+    elif wins == 30:
+        print('\nDealer: You\'ve racked up 30 wins, here\'s a gift for playing!')
+        print('*You recieved $10,000 from the dealer!*')
+        balance +=10000
+    elif wins == 20:
+        print('\nDealer: You\'ve racked up 20 wins, here\'s a gift for playing!')
+        print('*You recieved $5,000 from the dealer!*')
+        balance +=5000
+    elif wins == 10:
+        print('\nDealer: You\'ve racked up 10 wins, here\'s a gift for playing!')
+        print('*You recieved $1,000 from the dealer!*')
+        balance +=1000
+    elif wins == 5:
+        print('\nDealer: You\'ve racked up 5 wins, here\'s a gift for playing!')
+        print('*You received $500 from the dealer!*')
+        balance += 500
+    return balance
+
 # MAIN BLACKJACK GAME FUNCTION
 def twentyOne(wins, losses, balance, games):
     # PROMPT PLAYER TO PLACE A BET
@@ -59,7 +113,7 @@ def twentyOne(wins, losses, balance, games):
         except ValueError:
             print("Dealer: Are you stupid or something?")
 
-    #YOU AND THE COMPUTERS HAND
+    # YOU AND THE COMPUTER'S HAND
     player_turn = [deal(), deal()]
     computer_turn = [deal(), deal()]
     print(f"Your hand: {player_turn}")
@@ -82,7 +136,6 @@ def twentyOne(wins, losses, balance, games):
                 print(f'\nTotal Games: {games}')
                 print(f"Win percentage: {win_percentage}%")
                 print(f"Balance: ${balance}")
-
                 break
         elif action == 's':
             break
@@ -95,11 +148,12 @@ def twentyOne(wins, losses, balance, games):
             wins += 1
             games += 1
             balance += bet
-        #ENDING IN A DRAW IS RARE BUT MOST COMMON ON 20
-        #OF COURSE NO WINS OR LOSSES BUT ADDS TO TOTAL GAMES
+            balance = bonusBalance(wins, balance)
+        # ENDING IN A DRAW IS RARE BUT MOST COMMON ON 20
+        # OF COURSE NO WINS OR LOSSES BUT ADDS TO TOTAL GAMES
         elif dealer_value == cardValue(player_turn):
             print("DRAW!")
-            games +=1
+            games += 1
         else:
             print("Computer Wins!")
             losses += 1
@@ -129,17 +183,29 @@ def twentyOne(wins, losses, balance, games):
         print(f"Total Losses: {losses}")
         print(f'Total Games: {games}\n')
         print(f"You walked away with ${balance}")
-        #YOU GET A DIFFERENT RESPONSE DEPENDING ON LEAVE BALANCE
-        #HIGHEST TO LOWEST ALLOWS ALL TO POTENTIALLY DISPLAY
+        # YOU GET A DIFFERENT RESPONSE DEPENDING ON LEAVE BALANCE
+        # HIGHEST TO LOWEST ALLOWS ALL TO POTENTIALLY DISPLAY
 
         if balance == 0:
-            print('better luck next time!')
+            print('Better luck next time!')
         elif balance >= 1000000:
             print('ONE MILLION DOLLARS!!!!!!!!!!')
         elif balance >= 100000:
             print('Time to invest and retire!')
+        elif balance >= 90000:
+            print('I can invest this and hit one milly!')
+        elif balance >= 80000:
+            print('Babe let\'s go on a cruise!')
+        elif balance >= 70000:
+            print('Time to start a business!')
+        elif balance >= 60000:
+            print('60 thousand baby!!!!')
         elif balance >= 50000:
             print('I better go play the lotto!')
+        elif balance >= 40000:
+            print('I can buy a house!')
+        elif balance >= 30000:
+            print('Walking with 30K!')
         elif balance >= 20000:
             print('Twenty Thousand!!!!')
         elif balance >= 10000:
@@ -147,7 +213,7 @@ def twentyOne(wins, losses, balance, games):
         elif balance >= 5000:
             print('WOOO-HOOO Walking away with five grand!')
         elif balance >= 1000:
-            print("Lets go! Over a thousand!")
+            print("Let's go! Over a thousand!")
         elif balance < 250:
             print(f'Leaving with less sucks!')
         else:
